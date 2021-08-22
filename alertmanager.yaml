@@ -17,9 +17,8 @@ data:
     receivers:
     - name: slack_demo
       slack_configs:
-      - api_url: https://hooks.slack.com/services/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
-        channel: '#mon'
-        title: "Attention"
+      - api_url: https://hooks.slack.com/services/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
+        channel: '#test'
 ---
 apiVersion: v1
 kind: ConfigMap

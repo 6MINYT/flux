@@ -1,3 +1,4 @@
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -44,7 +45,7 @@ metadata:
 data:
   prometheus.rules: |-
     groups:
-    - name: devopscube demo alert
+    - name: RAM and CPU alert
       rules:
       - alert: High Pod Memory
         expr: sum(container_memory_usage_bytes) > 1
@@ -53,6 +54,13 @@ data:
           severity: slack
         annotations:
           summary: High Memory Usage
+      - alert: High CPU usage
+        expr: sum by(container)(rate(container_cpu_usage_second_total[1m])) > 1
+        for: 1m
+        labels:
+          severity: slack
+        annotations:
+          summary: High PODs CPU usage
   prometheus.yml: |-
     global:
       scrape_interval: 5s
